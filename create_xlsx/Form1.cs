@@ -46,7 +46,7 @@ namespace create_xlsx
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory).ToString();
                 openFileDialog.Filter = "xml files (*.xml)|*.xml*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -356,26 +356,21 @@ namespace create_xlsx
                                         }
                                     }
                                 }
-
-
-
-
                             }
 
                             j++;
                         }
-
-
                     }
-                    string mydocu = Environment.UserName.ToString();
-                    string pathForExselFile = @"C:\Users\" + mydocu + @"\Downloads\test.xlsx";
+                    string mydocu = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile).ToString();
+                    
+                    string pathForExselFile = mydocu + @"\Downloads\test.xlsx";
                     if (File.Exists(pathForExselFile))
                     {
                         int l = 0;
 
                         while (true)
                         {
-                            pathForExselFile = @"C:\Users\" + mydocu + @"\Downloads\test_" + l + ".xlsx";
+                            pathForExselFile = mydocu + @"\Downloads\test_" + l + ".xlsx";
                             if (File.Exists(pathForExselFile))
                             {
                                 l++;
@@ -502,7 +497,8 @@ namespace create_xlsx
             string mydocu = Environment.UserName.ToString();
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.InitialDirectory = @"C: \Users\" + mydocu + @"\Downloads\";
+
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile).ToString() + @"\Downloads\";
                 openFileDialog.Filter = "xlsx files (*.xlsx)|*.xlsx*";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
@@ -540,14 +536,14 @@ namespace create_xlsx
                 indexMetaChecked.Add(meta.IndexOf(itemChecked));
             }
             string mydocu = Environment.UserName.ToString();
-            string pathForNewFolderWithXml = @"C: \Users\" + mydocu + @"\Desktop\" + Path.GetFileNameWithoutExtension(filePathXLSX);
+            string pathForNewFolderWithXml = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory).ToString() +@"\"+ Path.GetFileNameWithoutExtension(filePathXLSX);
             if (Directory.Exists(pathForNewFolderWithXml))
             {
                 int l = 0;
 
                 while (true)
                 {
-                    pathForNewFolderWithXml = @"C:\Users\" + mydocu + @"\Desktop\" + Path.GetFileNameWithoutExtension(filePathXLSX) + "_" + l;
+                    pathForNewFolderWithXml = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory).ToString() + @"\" + Path.GetFileNameWithoutExtension(filePathXLSX) + "_" + l;
                     if (Directory.Exists(pathForNewFolderWithXml))
                     {
                         l++;
